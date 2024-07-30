@@ -48,6 +48,7 @@ export const ForgotPasswordScreen = ({ navigation }) => {
               title="CONTINUE"
               onPress={handleForgotPasswordPress}
               style={styles.button}
+              labelStyle={{ color: colors.white }}
             />
           </View>
         </KeyboardAvoidingView>

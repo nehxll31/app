@@ -5,34 +5,46 @@ import { Ionicons } from '@expo/vector-icons';
 import { useCart } from '../context/CartContext'; 
 import { colors } from '../utils/colors';
 
-const drinksData = [
+const shortEatsData = [
   {
     id: '1',
-    name: 'Minute Maid',
-    image: require('../assets/minute.jpg'),
+    name: 'Masala Kurkure',
+    image: require('../assets/kur1.jpg'),
     price: 20,
   },
   {
     id: '2',
-    name: 'Appy Fizz',
-    image: require('../assets/appy.jpg'),
-    price: 10,
+    name: 'Green Lays',
+    image: require('../assets/lays1.jpg'),
+    price: 20,
   },
   {
     id: '3',
-    name: 'Coca Cola',
-    image: require('../assets/coke.jpg'),
+    name: 'Blue Lays',
+    image: require('../assets/lays2.jpg'),
     price: 20,
   },
   {
     id: '4',
-    name: 'Pepsi',
-    image: require('../assets/pepsi.jpg'),
+    name: 'Orange Lays',
+    image: require('../assets/lays3.jpg'),
+    price: 20,
+  },
+  {
+    id: '5',
+    name: 'Nachos',
+    image: require('../assets/nacho.jpg'),
+    price: 35,
+  },
+  {
+    id: '6',
+    name: 'Rajasthani',
+    image: require('../assets/kur2.jpg'),
     price: 20,
   },
 ];
 
-const DrinksListScreen = ({ navigation }) => {
+const ShortEatsScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { cart, addToCart, removeFromCart } = useCart();
 
@@ -103,7 +115,7 @@ const DrinksListScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title="Beverages" titleStyle={styles.appbarTitle}/>
+        <Appbar.Content title="Short Eats" titleStyle={styles.appbarTitle}/>
         <Appbar.Action icon="cart" onPress={navigateToCart} />
         {totalItemsInCart > 0 && (
           <View style={styles.cartBadge}>
@@ -118,8 +130,8 @@ const DrinksListScreen = ({ navigation }) => {
         style={styles.searchBar}
       />
       <FlatList
-        data={drinksData.filter((drink) =>
-          drink.name.toLowerCase().includes(searchQuery.toLowerCase())
+        data={shortEatsData.filter((item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
         )}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
@@ -209,4 +221,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DrinksListScreen;
+export default ShortEatsScreen;

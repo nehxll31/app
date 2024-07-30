@@ -5,61 +5,71 @@ import { Ionicons } from '@expo/vector-icons';
 import { useCart } from '../context/CartContext'; 
 import { colors } from '../utils/colors';
 
-const drinksData = [
+const breakfastData = [
   {
     id: '1',
-    name: 'Minute Maid',
-    image: require('../assets/minute.jpg'),
-    price: 20,
+    name: 'Masala Dosa',
+    image: require('../assets/masala_dosa.jpg'),
+    price: 50,
   },
   {
     id: '2',
-    name: 'Appy Fizz',
-    image: require('../assets/appy.jpg'),
-    price: 10,
+    name: 'Idli',
+    image: require('../assets/idli.jpg'),
+    price: 30,
   },
   {
     id: '3',
-    name: 'Coca Cola',
-    image: require('../assets/coke.jpg'),
-    price: 20,
+    name: 'Idli and Vada',
+    image: require('../assets/idli_vada.jpg'),
+    price: 40,
   },
   {
     id: '4',
-    name: 'Pepsi',
-    image: require('../assets/pepsi.jpg'),
-    price: 20,
+    name: 'Upma',
+    image: require('../assets/upma.jpg'),
+    price: 35,
+  },
+  {
+    id: '5',
+    name: 'Set Dosa',
+    image: require('../assets/set_dosa.jpg'),
+    price: 45,
+  },
+  {
+    id: '6',
+    name: 'Rava Dosa',
+    image: require('../assets/rava_dosa.jpg'),
+    price: 50,
+  },
+  {
+    id: '7',
+    name: 'Poha',
+    image: require('../assets/poha.jpg'),
+    price: 25,
+  },
+  {
+    id: '8',
+    name: 'Ksheera',
+    image: require('../assets/sheera.jpg'),
+    price: 40,
   },
 ];
 
-const DrinksListScreen = ({ navigation }) => {
+const BreakfastListScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { cart, addToCart, removeFromCart } = useCart();
 
-  // Function to handle search query change
   const onChangeSearch = (query) => setSearchQuery(query);
 
-  // Function to increment item quantity in cart
   const incrementQuantity = (item) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
-    if (existingItem) {
-      addToCart({ ...existingItem, quantity: existingItem.quantity + 1 });
-    } else {
-      addToCart({ ...item, quantity: 1 });
-    }
+    addToCart(item);
   };
 
-  // Function to decrement item quantity in cart
   const decrementQuantity = (item) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
-    if (existingItem && existingItem.quantity > 1) {
-      removeFromCart({ ...existingItem, quantity: existingItem.quantity - 1 });
-    } else {
-      removeFromCart(item);
-    }
+    removeFromCart(item);
   };
 
-  // Function to render each item in the flatlist
   const renderItem = ({ item }) => {
     const cartItem = cart.find((cartItem) => cartItem.id === item.id);
     const quantity = cartItem ? cartItem.quantity : 0;
@@ -91,19 +101,17 @@ const DrinksListScreen = ({ navigation }) => {
     );
   };
 
-  // Calculate total items in cart
   const totalItemsInCart = cart.reduce((acc, curr) => acc + curr.quantity, 0);
 
-  // Function to navigate to cart screen
   const navigateToCart = () => {
-    navigation.navigate('Cart'); 
+    navigation.navigate('Cart');
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title="Beverages" titleStyle={styles.appbarTitle}/>
+        <Appbar.Content title="Breakfast" titleStyle={styles.appbarTitle}/>
         <Appbar.Action icon="cart" onPress={navigateToCart} />
         {totalItemsInCart > 0 && (
           <View style={styles.cartBadge}>
@@ -118,8 +126,8 @@ const DrinksListScreen = ({ navigation }) => {
         style={styles.searchBar}
       />
       <FlatList
-        data={drinksData.filter((drink) =>
-          drink.name.toLowerCase().includes(searchQuery.toLowerCase())
+        data={breakfastData.filter((item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
         )}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
@@ -186,7 +194,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   addButtonText: {
-    color: 'white',
+    color: colors.white,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -198,7 +206,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    right: 40,
+    right: 35,
     top: 0,
     zIndex: 1,
   },
@@ -209,4 +217,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DrinksListScreen;
+export default BreakfastListScreen;

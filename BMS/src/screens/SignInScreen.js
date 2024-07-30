@@ -19,7 +19,7 @@ export const SignInScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleSignInPress = () => {
-    navigation.navigate('MainScreen'); 
+    navigation.navigate('MainScreen');
   };
 
   const handleGoogleSignIn = () => {
@@ -27,15 +27,17 @@ export const SignInScreen = ({ navigation }) => {
   };
 
   const handleForgotPasswordPress = () => {
-    navigation.navigate('ForgotPassword'); 
+    navigation.navigate('ForgotPassword');
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.keyboardAvoidingView}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardAvoidingView}
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: -500 })}
+      >
+        <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.headerContainer}>
             <Text style={styles.header}>Sign In</Text>
             <Text style={styles.subHeader}>Please sign in to continue</Text>
@@ -77,6 +79,7 @@ export const SignInScreen = ({ navigation }) => {
               title="SIGN IN"
               onPress={handleSignInPress}
               style={styles.button}
+              labelStyle={{ color: colors.white }}
             />
           </View>
           <View style={styles.dividerContainer}>
@@ -92,19 +95,21 @@ export const SignInScreen = ({ navigation }) => {
               By clicking continue, you agree to our{' '}
               <Text
                 style={styles.link}
-                onPress={() => console.log('Terms of Service Pressed')}>
+                onPress={() => console.log('Terms of Service Pressed')}
+              >
                 Terms of Service
               </Text>{' '}
               and{' '}
               <Text
                 style={styles.link}
-                onPress={() => console.log('Privacy Policy Pressed')}>
+                onPress={() => console.log('Privacy Policy Pressed')}
+              >
                 Privacy Policy
               </Text>
             </Text>
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -116,6 +121,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
+    paddingTop:90,
   },
   keyboardAvoidingView: {
     flex: 1,
@@ -147,13 +153,14 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     backgroundColor: colors.pure,
-    color: colors.pure,
     height: 50,
+    justifyContent: 'center',
   },
   dividerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 20,
+    bottom:20,
   },
   intext: {
     fontSize: 16,
@@ -174,8 +181,8 @@ const styles = StyleSheet.create({
     color: '#828282',
   },
   googleButtonContainer: {
-    marginTop: -10, 
-    marginBottom: 30, 
+    marginTop: -10,
+    marginBottom: 30,
     alignItems: 'center',
   },
   bottomTextContainer: {

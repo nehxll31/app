@@ -66,6 +66,7 @@ const SignUpScreen = ({ navigation }) => {
         title="SIGN UP"
         onPress={handleSignUpPress}
         style={styles.button}
+        labelStyle={{ color: colors.white }}
       />
     </SafeAreaView>
   );

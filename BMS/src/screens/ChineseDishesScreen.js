@@ -5,41 +5,51 @@ import { Ionicons } from '@expo/vector-icons';
 import { useCart } from '../context/CartContext'; 
 import { colors } from '../utils/colors';
 
-const drinksData = [
+const chineseDishesData = [
   {
     id: '1',
-    name: 'Minute Maid',
-    image: require('../assets/minute.jpg'),
-    price: 20,
+    name: 'Paneer Chilli',
+    image: require('../assets/pan_chill.jpg'),
+    price: 70,
   },
   {
     id: '2',
-    name: 'Appy Fizz',
-    image: require('../assets/appy.jpg'),
-    price: 10,
+    name: 'Gobi Chilli',
+    image: require('../assets/gob_chill.jpg'),
+    price: 70,
   },
   {
     id: '3',
-    name: 'Coca Cola',
-    image: require('../assets/coke.jpg'),
-    price: 20,
+    name: 'Paneer Fried Rice',
+    image: require('../assets/pan_rice.jpg'),
+    price: 65,
   },
   {
     id: '4',
-    name: 'Pepsi',
-    image: require('../assets/pepsi.jpg'),
-    price: 20,
+    name: 'Gobi Rice',
+    image: require('../assets/gob_rice.jpg'),
+    price: 60,
+  },
+  {
+    id: '5',
+    name: 'Egg Fried Rice',
+    image: require('../assets/dish1.jpg'),
+    price: 70,
+  },
+  {
+    id: '6',
+    name: 'Egg Noodles',
+    image: require('../assets/egg_noo.jpg'),
+    price: 70,
   },
 ];
 
-const DrinksListScreen = ({ navigation }) => {
+const ChineseDishesScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { cart, addToCart, removeFromCart } = useCart();
 
-  // Function to handle search query change
   const onChangeSearch = (query) => setSearchQuery(query);
 
-  // Function to increment item quantity in cart
   const incrementQuantity = (item) => {
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
     if (existingItem) {
@@ -49,7 +59,6 @@ const DrinksListScreen = ({ navigation }) => {
     }
   };
 
-  // Function to decrement item quantity in cart
   const decrementQuantity = (item) => {
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
     if (existingItem && existingItem.quantity > 1) {
@@ -59,7 +68,6 @@ const DrinksListScreen = ({ navigation }) => {
     }
   };
 
-  // Function to render each item in the flatlist
   const renderItem = ({ item }) => {
     const cartItem = cart.find((cartItem) => cartItem.id === item.id);
     const quantity = cartItem ? cartItem.quantity : 0;
@@ -91,10 +99,8 @@ const DrinksListScreen = ({ navigation }) => {
     );
   };
 
-  // Calculate total items in cart
   const totalItemsInCart = cart.reduce((acc, curr) => acc + curr.quantity, 0);
 
-  // Function to navigate to cart screen
   const navigateToCart = () => {
     navigation.navigate('Cart'); 
   };
@@ -103,7 +109,7 @@ const DrinksListScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title="Beverages" titleStyle={styles.appbarTitle}/>
+        <Appbar.Content title="Chinese Dishes" titleStyle={styles.appbarTitle}/>
         <Appbar.Action icon="cart" onPress={navigateToCart} />
         {totalItemsInCart > 0 && (
           <View style={styles.cartBadge}>
@@ -118,8 +124,8 @@ const DrinksListScreen = ({ navigation }) => {
         style={styles.searchBar}
       />
       <FlatList
-        data={drinksData.filter((drink) =>
-          drink.name.toLowerCase().includes(searchQuery.toLowerCase())
+        data={chineseDishesData.filter((dish) =>
+          dish.name.toLowerCase().includes(searchQuery.toLowerCase())
         )}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
@@ -209,4 +215,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DrinksListScreen;
+export default ChineseDishesScreen;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { Button } from '../components/button';
 import GoogleButton from '../components/GoogleButton';
@@ -23,63 +23,67 @@ export const Focus = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.text1}>BMS</Text>
-        <Text style={styles.text2}>Vidhyarthi Khaana</Text>
-        <Text style={styles.text3}>Create an account</Text>
-        <Text style={styles.text4}>Enter your email to sign up </Text>
-      </View>
-      <View style={styles.inputWrapper}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={setSubject}
-            label="email@bmsce.ac.in"
-            mode="outlined"
-            value={subject}
-            theme={{
-              colors: {
-                primary: colors.gray2,
-                underlineColor: 'transparent',
-              },
-            }}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Sign up with email"
-            onPress={handleSignUpPress}
-            color={colors.white}
-          />
-        </View>
-        <Divider text="or continue with" />
-        <GoogleButton onPress={handleGoogleSignUp} style={styles.google} />
-      </View>
-      <View style={styles.bottomtext}>
-        <Text style={styles.text5}>
-          By clicking continue, you agree to our {''}
-          <Text
-            style={styles.link}
-            onPress={() => console.log('Terms of Service pressed')}>
-            Terms of Service
-          </Text>
-          {' '}
-          and {''}
-          <Text
-            style={styles.link}
-            onPress={() => console.log('Privacy Policy pressed')}>
-            Privacy Policy
-          </Text>
-        </Text>
-        {''}
-        <Text
-          style={styles.enter}
-          onPress={handleSignInPress}
-        >
-          Already have an account? Sign in
-        </Text>
-        {''}
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardAvoidingView}
+      >
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text1}>BMS</Text>
+            <Text style={styles.text2}>Vidhyarthi Khaana</Text>
+            <Text style={styles.text3}>Create an account</Text>
+            <Text style={styles.text4}>Enter your email to sign up </Text>
+          </View>
+          <View style={styles.inputWrapper}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={setSubject}
+                label="email@bmsce.ac.in"
+                mode="outlined"
+                value={subject}
+                theme={{
+                  colors: {
+                    primary: colors.gray2,
+                    underlineColor: 'transparent',
+                  },
+                }}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Sign up with email"
+                onPress={handleSignUpPress}
+                color={colors.white}
+                labelStyle={{ color: colors.white }} 
+              />
+            </View>
+            <Divider text="or continue with" />
+            <GoogleButton onPress={handleGoogleSignUp} style={styles.google} />
+          </View>
+          <View style={styles.bottomtext}>
+            <Text style={styles.text5}>
+              By clicking continue, you agree to our{' '}
+              <Text
+                style={styles.link}
+                onPress={() => console.log('Terms of Service pressed')}
+              >
+                Terms of Service
+              </Text>{' '}
+              and{' '}
+              <Text
+                style={styles.link}
+                onPress={() => console.log('Privacy Policy pressed')}
+              >
+                Privacy Policy
+              </Text>
+            </Text>
+            <Text style={styles.enter} onPress={handleSignInPress}>
+              Already have an account? Sign in
+            </Text>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -87,14 +91,19 @@ export const Focus = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
+  },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textContainer: {
     paddingTop: 50,
-    position: 'absolute',
-    top: 50, 
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   text1: {
     color: colors.pure,
@@ -118,22 +127,21 @@ const styles = StyleSheet.create({
   },
   text5: {
     color: '#828282',
-    textAlign: 'center', 
+    textAlign: 'center',
+    bottom:40,
   },
   link: {
     color: colors.black,
   },
   bottomtext: {
-    top: 8,
     paddingLeft: 27,
     paddingRight: 22,
-    paddingTop: 20,
+    paddingTop: 5,
     alignItems: 'center',
   },
   inputWrapper: {
-    alignItems: 'center', 
+    alignItems: 'center',
     paddingBottom: 70,
-    top: 69,
   },
   inputContainer: {
     width: 327,
@@ -146,10 +154,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 327,
     alignItems: 'center',
-    color:colors.pure,
   },
   enter: {
-    top: 175,
+    top:80,
     fontSize: 16,
     fontWeight: '600',
   },

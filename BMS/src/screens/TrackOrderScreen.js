@@ -18,7 +18,7 @@ const TrackOrderScreen = () => {
         <Divider style={styles.divider} />
 
         <Image 
-          source={{ uri: 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDNna2RzMjZ5bXRmOTg5aXFuN2k1eDh1cTVqdHo1ZzBsdTE0Z2l6aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1TJTwU3VfPHU4FCbx/giphy.webp' }} 
+          source={{ uri: '' }} 
           style={styles.gif} 
         />
 
