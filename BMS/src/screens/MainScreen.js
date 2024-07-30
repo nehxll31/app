@@ -13,10 +13,7 @@ import {
 import RNPickerSelect from "react-native-picker-select";
 import { colors } from "../utils/colors";
 import Icon from "react-native-vector-icons/Ionicons";
-import { FontAwesome } from "@expo/vector-icons";
 import { useCart } from "../context/CartContext";
-import ChineseDishesScreen from "./ChineseDishesScreen";
-import ShortEatsScreen from "./ShortEatsScreen";
 
 const categories = [
   {
@@ -46,44 +43,174 @@ const categories = [
 ];
 
 const topPicks = [
-  { id: "1", title: "Omelette", image: require("../assets/omelette.jpg"), price: 30 },
-  { id: "2", title: "Samosa", image: require("../assets/samosa.jpg"), price: 10 },
   {
-    id: "3",
+    id: "t1",
+    title: "Omelette",
+    image: require("../assets/omelette.jpg"),
+    price: 30,
+  },
+  {
+    id: "t2",
+    title: "Samosa",
+    image: require("../assets/samosa.jpg"),
+    price: 10,
+  },
+  {
+    id: "t3",
     title: "Veg Fry Maggi",
     image: require("../assets/veg-fry-maggi.jpg"),
     price: 50,
   },
-  { id: "4", title: "Vada Pav", image: require("../assets/vada-pav.jpg"), price: 20 },
+  {
+    id: "4",
+    title: "Vada Pav",
+    image: require("../assets/vada-pav.jpg"),
+    price: 20,
+  },
 ];
 
 const popularDishes = [
-  { id: "1", title: "Egg Rice", image: require("../assets/dish1.jpg"), price: 60 },
-  { id: "2", title: "Masala Dosa", image: require("../assets/dish2.jpg"), price: 40 },
-  { id: "3", title: "Black Coffee", image: require("../assets/dish3.jpg"), price: 20 },
-  { id: "4", title: "Lemon Tea", image: require("../assets/lemon-tea.jpg"), price: 15 },
+  {
+    id: "p1",
+    title: "Egg Rice",
+    image: require("../assets/dish1.jpg"),
+    price: 60,
+  },
+  {
+    id: "p2",
+    title: "Masala Dosa",
+    image: require("../assets/dish2.jpg"),
+    price: 40,
+  },
+  {
+    id: "p3",
+    title: "Black Coffee",
+    image: require("../assets/dish3.jpg"),
+    price: 20,
+  },
+  {
+    id: "p4",
+    title: "Lemon Tea",
+    image: require("../assets/lemon-tea.jpg"),
+    price: 15,
+  },
 ];
 
 const menuItems = [
-  { id: "1", title: "Samosa", price: 15, image: require("../assets/samosa.jpg") },
-  { id: "2", title: "Egg Puff", price: 20, image: require("../assets/egg_puff.jpg") },
-  { id: "3", title: "Veg Puff", price: 15, image: require("../assets/veg_puff.jpg") },
-  { id: "4", title: "Veg Fried Maggi", price: 45, image: require("../assets/veg-fry-maggi.jpg") },
-  { id: "5", title: "Parotha, Egg Curry", price: 60, image: require("../assets/par_egg.jpg") },
-  { id: "6", title: "Mangalore Buns", price: 30, image: require("../assets/mang_buns.jpg") },
-  { id: "7", title: "Paneer Chilly", price: 70, image: require("../assets/pan_chill.jpg") },
-  { id: "8", title: "Gobi Chilly", price: 70, image: require("../assets/gob_chill.jpg") },
-  { id: "9", title: "Paneer Fried Rice", price: 60, image: require("../assets/pan_rice.jpg") },
-  { id: "10", title: "Gobi Rice", price: 60, image: require("../assets/gob_rice.jpg") },
-  { id: "12", title: "Sandwich", price: 60, image: require("../assets/sand.jpg") },
-  { id: "13", title: "Vada Pav", price: 25, image: require("../assets/vada-pav.jpg") },
-  { id: "14", title: "Green Lays", price: 20, image: require("../assets/lays1.jpg") },
-  { id: "15", title: "Egg Noodles", price: 70, image: require("../assets/egg_noo.jpg") },
-  { id: "16", title: "Cheese Omelette", price: 40, image: require("../assets/omelette.jpg") },
-  { id: "17", title: "Fruit Bowl", price: 35, image: require("../assets/fruit.jpg") },
-  { id: "18", title: "Cup Noodles", price: 30, image: require("../assets/cup.jpg") },
-  { id: "19", title: "Banana Cake", price: 40, image: require("../assets/ban.jpg") },
-  { id: "20", title: "Doughnut", price: 40, image: require("../assets/doughnut.jpg") },
+  {
+    id: "m1",
+    title: "Samosa",
+    price: 15,
+    image: require("../assets/samosa.jpg"),
+  },
+  {
+    id: "m2",
+    title: "Egg Puff",
+    price: 20,
+    image: require("../assets/egg_puff.jpg"),
+  },
+  {
+    id: "m3",
+    title: "Veg Puff",
+    price: 15,
+    image: require("../assets/veg_puff.jpg"),
+  },
+  {
+    id: "m4",
+    title: "Veg Fried Maggi",
+    price: 45,
+    image: require("../assets/veg-fry-maggi.jpg"),
+  },
+  {
+    id: "m5",
+    title: "Parotha, Egg Curry",
+    price: 60,
+    image: require("../assets/par_egg.jpg"),
+  },
+  {
+    id: "m6",
+    title: "Mangalore Buns",
+    price: 30,
+    image: require("../assets/mang_buns.jpg"),
+  },
+  {
+    id: "m7",
+    title: "Paneer Chilly",
+    price: 70,
+    image: require("../assets/pan_chill.jpg"),
+  },
+  {
+    id: "m8",
+    title: "Gobi Chilly",
+    price: 70,
+    image: require("../assets/gob_chill.jpg"),
+  },
+  {
+    id: "m9",
+    title: "Paneer Fried Rice",
+    price: 60,
+    image: require("../assets/pan_rice.jpg"),
+  },
+  {
+    id: "m10",
+    title: "Gobi Rice",
+    price: 60,
+    image: require("../assets/gob_rice.jpg"),
+  },
+  {
+    id: "m12",
+    title: "Sandwich",
+    price: 60,
+    image: require("../assets/sand.jpg"),
+  },
+  {
+    id: "m13",
+    title: "Vada Pav",
+    price: 25,
+    image: require("../assets/vada-pav.jpg"),
+  },
+  {
+    id: "m14",
+    title: "Green Lays",
+    price: 20,
+    image: require("../assets/lays1.jpg"),
+  },
+  {
+    id: "m15",
+    title: "Egg Noodles",
+    price: 70,
+    image: require("../assets/egg_noo.jpg"),
+  },
+  {
+    id: "m16",
+    title: "Cheese Omelette",
+    price: 40,
+    image: require("../assets/omelette.jpg"),
+  },
+  {
+    id: "m17",
+    title: "Fruit Bowl",
+    price: 35,
+    image: require("../assets/fruit.jpg"),
+  },
+  {
+    id: "m18",
+    title: "Cup Noodles",
+    price: 30,
+    image: require("../assets/cup.jpg"),
+  },
+  {
+    id: "m19",
+    title: "Banana Cake",
+    price: 40,
+    image: require("../assets/ban.jpg"),
+  },
+  {
+    id: "m20",
+    title: "Doughnut",
+    price: 40,
+    image: require("../assets/doughnut.jpg"),
+  },
 ];
 
 const MainScreen = ({ navigation }) => {
@@ -91,6 +218,8 @@ const MainScreen = ({ navigation }) => {
   const { cartItems, addToCart } = useCart();
   const [quantities, setQuantities] = useState({});
   const scrollY = useRef(new Animated.Value(0)).current;
+
+  const { removeFromCart, updateCartItem } = useCart();
 
   const handleAddToCart = (item) => {
     addToCart(item);
@@ -106,15 +235,18 @@ const MainScreen = ({ navigation }) => {
       [item.id]: (prevQuantities[item.id] || 0) + 1,
     }));
   };
-  
+
   const handleIncrease = (item) => {
+    addToCart(item);
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [item.id]: (prevQuantities[item.id] || 0) + 1,
     }));
   };
-  
+
   const handleDecrease = (item) => {
+    console.log("Handling decrease for item: ", item); // Add this line
+    removeFromCart(item);
     setQuantities((prevQuantities) => {
       const newQuantities = { ...prevQuantities };
       if (newQuantities[item.id] > 1) {
@@ -125,8 +257,6 @@ const MainScreen = ({ navigation }) => {
       return newQuantities;
     });
   };
-  
-  
 
   const renderCategoryItem = ({ item }) => (
     <TouchableOpacity
@@ -148,7 +278,7 @@ const MainScreen = ({ navigation }) => {
       <Text style={styles.categoryDescription}>{item.description}</Text>
     </TouchableOpacity>
   );
-  
+
   const renderTopPickItem = ({ item }) => (
     <View style={styles.topPickItem}>
       <Image source={item.image} style={styles.topPickImage} />
@@ -180,7 +310,7 @@ const MainScreen = ({ navigation }) => {
       )}
     </View>
   );
-  
+
   const renderPopularDishItem = ({ item }) => (
     <View style={styles.popularDishItem}>
       <Image source={item.image} style={styles.popularDishImage} />
@@ -212,7 +342,7 @@ const MainScreen = ({ navigation }) => {
       )}
     </View>
   );
-  
+
   const renderMenuItem = ({ item }) => (
     <View style={styles.menuItem}>
       <Image source={item.image} style={styles.menuItemImage} />
@@ -244,8 +374,6 @@ const MainScreen = ({ navigation }) => {
       )}
     </View>
   );
-  
-  
 
   const translateY = scrollY.interpolate({
     inputRange: [0, 50],
@@ -255,98 +383,101 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
-        )}
-        scrollEventThrottle={16}
-      >
-        <View style={styles.header}>
-          <RNPickerSelect
-            onValueChange={(value) => setLocation(value)}
-            items={[
-              {
-                label: "Vidhyarthi Khaana, Mechanical block",
-                value: "Vidhyarthi Khaana, Mechanical block",
-              },
-              {
-                label: "Vidhyarthi Khaana, Sports Complex",
-                value: "Vidhyarthi Khaana, Sports Complex",
-              },
-            ]}
-            style={pickerSelectStyles}
-            placeholder={{ label: "Select a location", value: null }}
-          />
-          <TouchableOpacity
-            style={styles.cartIcon}
-            onPress={() => navigation.navigate("Cart", { cartItems })}
-          >
-            <FontAwesome name="shopping-cart" size={30} color={colors.black} />
-          </TouchableOpacity>
-        </View>
+      <FlatList
+        data={menuItems}
+        renderItem={renderMenuItem}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.menuList}
+        ListHeaderComponent={
+          <>
+            <View style={styles.header}>
+              <RNPickerSelect
+                onValueChange={(value) => setLocation(value)}
+                items={[
+                  {
+                    label: "Vidhyarthi Khaana, Mechanical block",
+                    value: "Vidhyarthi Khaana, Mechanical block",
+                  },
+                  {
+                    label: "Vidhyarthi Khaana, Sports Complex",
+                    value: "Vidhyarthi Khaana, Sports Complex",
+                  },
+                ]}
+                style={pickerSelectStyles}
+                placeholder={{ label: "Select a location", value: null }}
+              />
+            </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Shop by categories</Text>
-          <FlatList
-            data={categories}
-            renderItem={renderCategoryItem}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.flatList}
-          />
-        </View>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Shop by categories</Text>
+              <FlatList
+                data={categories}
+                renderItem={renderCategoryItem}
+                keyExtractor={(item) => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.flatList}
+              />
+            </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Top picks for you</Text>
-          <FlatList
-            data={topPicks}
-            renderItem={renderTopPickItem}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.flatList}
-          />
-        </View>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Top picks for you</Text>
+              <FlatList
+                data={topPicks}
+                renderItem={renderTopPickItem}
+                keyExtractor={(item) => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.flatList}
+              />
+            </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Popular Dishes</Text>
-          <FlatList
-            data={popularDishes}
-            renderItem={renderPopularDishItem}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.flatList}
-          />
-        </View>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Popular Dishes</Text>
+              <FlatList
+                data={popularDishes}
+                renderItem={renderPopularDishItem}
+                keyExtractor={(item) => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.flatList}
+              />
+            </View>
+          </>
+        }
+      />
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Menu</Text>
-          <FlatList
-            data={menuItems}
-            renderItem={renderMenuItem}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.menuList}
-          />
-        </View>
-      </Animated.ScrollView>
       <Animated.View
-        style={[styles.bottomBar, { transform: [{ translateY }] }]}
+        style={[
+          styles.bottomBar,
+          {
+            transform: [{ translateY }],
+          },
+        ]}
       >
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("MainScreen")}
         >
-          <Icon name="home-outline" size={24} color={colors.black} mode="contained"/>
+          <Icon name="home-outline" size={24} color={colors.black} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Search")}
         >
           <Icon name="search-outline" size={24} color={colors.black} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Cart", { cartItems })}
+        >
+          <Icon name="cart-outline" size={27} color={colors.black} />
+          {cartItems?.length > 0 && (
+            <View style={styles.badgeContainer}>
+              <Text style={styles.badgeText}>{cartItems.length}</Text>
+            </View>
+          )}
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -365,7 +496,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   header: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
@@ -458,13 +589,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: colors.white,
     padding: 10,
-    justifyContent: "space-around",
-    borderColor:colors.gray2,
+    justifyContent: "space-between",
+    borderTopWidth: 1,
+    borderTopColor: colors.gray,
   },
+
   button: {
     flex: 1,
     alignItems: "center",
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
   buttonText: {
     color: colors.white,
@@ -490,6 +624,22 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     fontSize: 16,
     fontWeight: "600",
+  },
+  badgeContainer: {
+    position: "absolute",
+    right: -6,
+    top: -6,
+    backgroundColor: "red",
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  badgeText: {
+    color: "white",
+    fontSize: 12,
+    fontWeight: "bold",
   },
   menuItem: {
     flexDirection: "row",
@@ -530,8 +680,8 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: "purple",
+    borderWidth: 1,
+    borderColor: "black",
     borderRadius: 8,
     color: "black",
     paddingRight: 30,

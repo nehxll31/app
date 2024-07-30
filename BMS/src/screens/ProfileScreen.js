@@ -1,20 +1,61 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../utils/colors";
+import { getAuth, signOut } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+
 
 const ProfileScreen = ({ navigation }) => {
-  const handleLogout = () => {
-    // Perform logout actions
-    // Navigate to MainScreen
-    navigation.navigate("Focus");
+  const [userDetails, setUserDetails] = useState({ name: '', email: '', profilePicture: '' });
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const auth = getAuth();
+        const firestore = getFirestore();
+        const user = auth.currentUser;
+
+        if (user) {
+          const docRef = doc(firestore, 'users', user.uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            setUserDetails(docSnap.data());
+          } else {
+            Alert.alert("Error", "No such user!");
+          }
+        }
+      } catch (error) {
+        Alert.alert("Error", error.message);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+      navigation.navigate("Focus");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
   };
+
   const handleAboutPress = () => {
-    navigation.navigate("About"); 
+    navigation.navigate("About");
   };
+
   const handleMyOrdersPress = () => {
-    navigation.navigate("TrackOrder"); 
+    navigation.navigate("TrackOrder");
   };
+
+  const getInitials = (name) => {
+    return name ? name.charAt(0).toUpperCase() : "";
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -26,14 +67,20 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styles.profileBox}>
         <View style={styles.profileContainer}>
           <View style={styles.profileDetails}>
-            <Text style={styles.name}>Name</Text>
-            <Text style={styles.email}>example@bmsce.ac.in</Text>
+            <Text style={styles.name}>{userDetails.name}</Text>
+            <Text style={styles.email}>{userDetails.email}</Text>
             <TouchableOpacity>
               <Text style={styles.editProfile}>Edit Profile {">"}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.profileImage}>
-            <Ionicons name="person-circle" size={64} color="gray" />
+            {userDetails.profilePicture ? (
+              <Image source={{ uri: userDetails.profilePicture }} style={styles.image} />
+            ) : (
+              <View style={styles.initialsContainer}>
+                <Text style={styles.initials}>{getInitials(userDetails.name)}</Text>
+              </View>
+            )}
           </View>
         </View>
       </View>
@@ -74,6 +121,37 @@ const ProfileScreen = ({ navigation }) => {
             <Text style={styles.menuText}>Log out</Text>
           </View>
           <Ionicons name="chevron-forward" size={20} color="gray" />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.bottomBar}>
+        <TouchableOpacity
+          
+          onPress={() => navigation.navigate("MainScreen")}
+        >
+          <Ionicons name="home-outline" size={24} color={colors.black} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          
+          onPress={() => navigation.navigate("Search")}
+        >
+          <Ionicons name="search-outline" size={24} color={colors.black} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          
+          onPress={() => navigation.navigate("Cart", { cartItems: [] })}
+        >
+          <Ionicons name="cart-outline" size={27} color={colors.black} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Ionicons
+            name="person-circle-outline"
+            size={27}
+            color={colors.black}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -140,6 +218,24 @@ const styles = StyleSheet.create({
   profileImage: {
     marginLeft: 10,
   },
+  image: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+  },
+  initialsContainer: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: "gray",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  initials: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
   buttonsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -178,6 +274,22 @@ const styles = StyleSheet.create({
     color: "#fd5050",
     fontWeight: "bold",
   },
+  bottomBar: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    backgroundColor: colors.white,
+    padding: 20,
+    justifyContent: "space-around",
+    borderTopWidth: 1,
+    borderTopColor: colors.gray,
+  },
+  bottomBarButton: {
+    alignItems: "center",
+  },
+  
 });
 
 export default ProfileScreen;

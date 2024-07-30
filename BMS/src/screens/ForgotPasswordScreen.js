@@ -19,6 +19,10 @@ export const ForgotPasswordScreen = ({ navigation }) => {
     // Handle forgot password logic here
   };
 
+  const onChangeEmail = (text) => {
+    setEmail(text.toLowerCase()); // Convert email input to lowercase
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -35,7 +39,7 @@ export const ForgotPasswordScreen = ({ navigation }) => {
               style={styles.textInput}
               placeholder="email@bmsce.ac.in"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={onChangeEmail}
               mode="outlined"
               theme={{
                 colors: {
@@ -67,12 +71,13 @@ const styles = StyleSheet.create({
   },
   keyboardAvoidingView: {
     flex: 1,
+    top:70,
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
   headerContainer: {
     alignItems: 'center',
-    marginVertical: -80, 
+    marginVertical: -80, // Adjust as needed
   },
   header: {
     fontSize: 28,
@@ -80,17 +85,17 @@ const styles = StyleSheet.create({
     color: colors.pure,
   },
   subHeader: {
-    top:20,
+    top: 20, // Adjust as needed
     fontSize: 16,
     fontWeight: '600',
     color: colors.black,
-    marginBottom: 10, 
+    marginBottom: 10, // Adjust as needed
   },
   formContainer: {
-    marginVertical: 150, 
+    marginVertical: 150, // Adjust as needed
   },
   button: {
-    marginTop: 10, 
+    marginTop: 10, // Adjust as needed
     backgroundColor: colors.pure,
     height: 50,
   },
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 40,
-    marginBottom: 10, 
+    marginBottom: 10, // Adjust as needed
   },
 });
 
